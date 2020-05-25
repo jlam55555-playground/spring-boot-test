@@ -1,0 +1,10 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory and libs
+build
+lib
+
+# see: https://stackoverflow.com/a/11968647/2397327
+**/.idea/workspace.xml
+**/.idea/tasks.xml
