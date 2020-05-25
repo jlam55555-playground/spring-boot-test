@@ -1,0 +1,39 @@
+---
+# ansible playbook to build the docker image
+- hosts: webservers
+  become: true
+
+  tasks:
+  - name: Install pip
+    pacman:
+      name: python-pip
+      state: present
+  - name: Install pip docker
+    pip:
+      name: docker
+      state: present
+  - name: Stop old docker container
+    docker_container:
+      name: sbt
+      state: absent
+  - name: Remove old docker image
+    docker_image:
+      name: spring-boot-test
+      state: absent
+  - name: Build docker image
+    docker_image:
+      name: spring-boot-test
+      state: present
+      build:
+        pull: false
+        path: "{{ playbook_dir }}"
+      source: build
+  - name: Run docker image
+    docker_container:
+      auto_remove: true
+      detach: true
+      image: spring-boot-test
+      name: sbt
+      ports:
+      - 5000:8080
+...
