@@ -10,9 +10,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                ansiblePlaybook {
-                    playbook 'ansible-docker.yaml'
-                }
+                ansiblePlaybook(
+                    playbook: 'ansible-docker.yaml'
+                )
             }
         }
     }
