@@ -4,12 +4,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
+                sh './gradlew build'
             }
         }
         stage('Deploy') {
             agent {
                 dockerfile {
-                    args '-p 5000:8080 -t sbt'
+                    additionalBuildArgs '-t sbt'
+                    args '-p 5000:8080'
                 }
             }
             steps {
