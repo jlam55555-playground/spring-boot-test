@@ -11,6 +11,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 ansiblePlaybook(
+                    credentialsId: 'archvm',
                     playbook: 'ansible-docker.yaml'
                 )
             }
