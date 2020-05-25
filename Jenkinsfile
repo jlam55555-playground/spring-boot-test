@@ -1,8 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            label 'sbt'
-            args '-p 5000:8080'
+            args '-p 5000:8080 -t sbt'
         }
     }
     stages {
